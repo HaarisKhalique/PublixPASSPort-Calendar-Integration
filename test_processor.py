@@ -122,7 +122,7 @@ def process_html(html_content):
     return workdays
 
 def main():
-    file = open('schedule.html', 'r')
+    file = open('Scheduling.htm', 'r')
     process_html(file)
     #test = process_html(file)
     #for s in test:

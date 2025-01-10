@@ -52,7 +52,7 @@ def update_calendar(workdays):
                 }
                 shift = service.events().insert(calendarId= 'primary', body = shift).execute()
                 
-                if(day.meal_start is not None):
+                if(day.meal_start != None):
                     meal = {
                         'summary': 'Break',
                     'start': {
