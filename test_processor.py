@@ -74,11 +74,6 @@ def process_html(html_content):
         current_month = (int)(date_format.group(1))
         current_day = (int)(date_format.group(2))
         current_year = (int)(date_format.group(3))
-    
-    print(week_start_date)
-    print(current_month)
-    print(current_day)
-    print(current_year)
 
     #Obtain shift data for dates scheduled to work. Exclude elements where employee is not scheduled.
     days = schedule.find_all('div', class_= 'pb-3') 
@@ -96,18 +91,21 @@ def process_html(html_content):
         dates.append(f'{current_month}/{day_number}/{current_year}')
 
         # Find shift times
-        shift = day.find('div', class_= 'col-xs-10')
-        shift_time = shift.find_next('div', text= lambda x: x and '-' in x)
-        shifts.append(shift_time.text.strip())
+        shift = day.find("div", id=lambda x: x and x.startswith('shift-details'))
+        if(shift):  
+            shift_time = shift.find_next('div', sting= lambda x: x and '-' in x)
+            shifts.append(shift_time.text.strip())
 
-        # Find meal times
-        meal = shift.find_next('div', class_='pt-3')
-        if(meal):
-            meal_div = meal.find('div', class_= 'pb-3')
-            meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
-            meals.append(meal_time.text.strip())
-
+            # Find meal times
+            meal = shift.find_next('div', class_='pt-3')
+            if(meal):
+                meal_div = meal.find('div', class_= 'pb-3')
+                meal_time = meal_div.find('div', string=lambda x: x and '-' in x)
+                meals.append(meal_time.text.strip())
+            else:
+                meals.append(None)
         else:
+            shifts.append(None)
             meals.append(None)
    
     # create WorkDay objects, store in workdays

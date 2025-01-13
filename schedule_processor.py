@@ -84,29 +84,36 @@ def process_html(html_content):
     for day in scheduled_days:
         # Find days employee is schedule
         day_number = (int)(day.find('div', class_= 'calendar-day-of-month-number').text.strip())
+        
+        #Handle transitions to new month and/or year
         if (day_number < current_day):
             current_day = day_number
             current_month += 1
             if(current_month > 12):
                 current_month = 1
                 current_year +=1
+
         dates.append(f'{current_month}/{day_number}/{current_year}')
 
         # Find shift times
-        shift = day.find('div', class_= 'col-xs-10')
-        shift_time = shift.find_next('div', text= lambda x: x and '-' in x)
-        shifts.append(shift_time.text.strip())
+        shift = day.find("div", id=lambda x: x and x.startswith('shift-details'))
+        if(shift):  
+            shift_time = shift.find_next('div', string= lambda x: x and '-' in x)
+            shifts.append(shift_time.text.strip())
 
-        # Find meal times
-        meal = shift.find_next('div', class_='pt-3')
-        if(meal):
-            meal_div = meal.find('div', class_= 'pb-3')
-            meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
-            meals.append(meal_time.text.strip())
+            # Find meal times
+            meal = shift.find('div', class_='pt-3')
+            if(meal):
+                meal_div = meal.find('div', class_= 'pb-3')
+                meal_time = meal_div.find('div', string=lambda x: x and '-' in x)
+                meals.append(meal_time.text.strip())
 
+            else:
+                meals.append(None)
         else:
+            shifts.append(None)
             meals.append(None)
-   
+    
     # create WorkDay objects, store in workdays
     for i in range(0, len(dates)):
         shift_start, shift_end = format_time(dates[i], shifts[i])
