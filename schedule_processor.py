@@ -59,7 +59,7 @@ def process_html(html_content):
     # create soup from html
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    #Locate schedule element. If not found, terminate program; the file is invalid.
+    #Locate schedule element. If not found, exit; the file is invalid.
     schedule = soup.find('div', id = 'redesignedSchedule')       
     if schedule is None:
         print("Invalid file. Obtain the correct HTML file from the schedule tab on PASSPort, then try again.")

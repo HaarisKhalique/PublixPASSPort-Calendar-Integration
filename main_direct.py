@@ -14,7 +14,7 @@ def main():
     html_files = glob.glob(os.path.join("input", "*.htm*"))
     print(f"Found {len(html_files)} files.")
     
-    #End program if no html files are found
+    #End if no html files are found
     if len(html_files) == 0:
         print("No input files found.")
         sys.exit(1)
@@ -28,7 +28,7 @@ def main():
 
         print(f"Schedule data uploaded. Deleting {file}...")
         os.remove(file)
-        
+
     print("All files have been processed. Goodbye!")
     exit()
 if __name__ == '__main__':
