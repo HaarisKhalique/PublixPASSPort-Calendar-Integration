@@ -12,6 +12,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+CREDENTIALS_PATH = 'auth/credentials.json'
+TOKEN_PATH = 'auth/token.json'
 
 def update_calendar(workdays):
     
@@ -21,17 +23,17 @@ def update_calendar(workdays):
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first time.
-        if os.path.exists('token.json'):
-            creds = Credentials.from_authorized_user_file('token.json', constants.SCOPES)
+        if os.path.exists(TOKEN_PATH):
+            creds = Credentials.from_authorized_user_file(TOKEN_PATH, constants.SCOPES)
         
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_secrets_file('credentials.json', constants.SCOPES)
+                flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_PATH, constants.SCOPES)
                 creds = flow.run_local_server(port = 0)
                 #Save credentials for next run
-                with open('token.json', 'w') as token:
+                with open(TOKEN_PATH, 'w') as token:
                     token.write(creds.to_json())
 
         # Create an event in primary

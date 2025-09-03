@@ -4,6 +4,7 @@ This module processes the schedule html to
 retrieve the desired information.
 '''
 import re
+import sys
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -58,8 +59,11 @@ def process_html(html_content):
     # create soup from html
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    #Locate schedule element
-    schedule = soup.find('div', id = 'redesignedSchedule')
+    #Locate schedule element. If not found, terminate program; the file is invalid.
+    schedule = soup.find('div', id = 'redesignedSchedule')       
+    if schedule is None:
+        print("Invalid file. Obtain the correct HTML file from the schedule tab on PASSPort, then try again.")
+        sys.exit(1)
 
     #Obtain week start date to extract month, day, year
     week_start_date = schedule.find_next('span').text.strip()
