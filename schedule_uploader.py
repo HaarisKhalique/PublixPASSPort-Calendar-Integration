@@ -4,7 +4,7 @@ This module creates events in Google Calendar
 '''
 import datetime
 import os.path
-import constants
+
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -14,6 +14,7 @@ from googleapiclient.errors import HttpError
 
 CREDENTIALS_PATH = 'auth/credentials.json'
 TOKEN_PATH = 'auth/token.json'
+SCOPES = ["https://www.googleapis.com/auth/calendar.events"] # OAuth 2.0 scope for Google Calendar API v3 (see, edit, share, delete)
 
 def update_calendar(workdays):
     
@@ -24,13 +25,13 @@ def update_calendar(workdays):
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first time.
         if os.path.exists(TOKEN_PATH):
-            creds = Credentials.from_authorized_user_file(TOKEN_PATH, constants.SCOPES)
+            creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
         
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_PATH, constants.SCOPES)
+                flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_PATH, SCOPES)
                 creds = flow.run_local_server(port = 0)
                 #Save credentials for next run
                 with open(TOKEN_PATH, 'w') as token:
@@ -68,9 +69,6 @@ def update_calendar(workdays):
                     }
                     meal = service.events().insert(calendarId= 'primary', body = meal).execute()
                 
-                
-            print ('Shifts have been added to your calendar: %s' % (shift.get('htmlLink')))
-
         except HttpError as error:
             print(f"An error occurred: {error}")
    
