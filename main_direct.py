@@ -11,6 +11,8 @@ from schedule_processor import process_html
 from schedule_uploader import update_calendar
 
 INPUT_DIR = "input"
+
+#Deletes all files in input directory.
 def delete_input_files(directory_path):
     for item in os.listdir(directory_path):
         item_path = os.path.join(directory_path, item)
