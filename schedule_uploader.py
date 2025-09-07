@@ -2,10 +2,7 @@
 '''
 This module creates events in Google Calendar
 '''
-import datetime
 import os.path
-
-
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -17,9 +14,7 @@ TOKEN_PATH = 'auth/token.json'
 SCOPES = ["https://www.googleapis.com/auth/calendar.events"] # OAuth 2.0 scope for Google Calendar API v3 (see, edit, share, delete)
 
 def update_calendar(workdays):
-    
     if len(workdays) > 0:    
-
         # The following code was taken from Google's quickstart.py file to authenticate a user
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
@@ -40,7 +35,6 @@ def update_calendar(workdays):
         # Create an event in primary
         try:
             service = build('calendar', 'v3', credentials=creds)
-
             for day in workdays:
                 shift = {
                     'summary': 'Work',
@@ -67,10 +61,9 @@ def update_calendar(workdays):
                         'timeZone': 'America/New_York',   
                     }
                     }
-                    meal = service.events().insert(calendarId= 'primary', body = meal).execute()
-                
+                    meal = service.events().insert(calendarId= 'primary', body = meal).execute()   
         except HttpError as error:
             print(f"An error occurred: {error}")
-   
+            
     else:
         print("No schedule data to append to your calendar. Try again when the new schedule releases next Tuesday.")

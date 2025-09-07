@@ -24,10 +24,11 @@ def delete_input_files(directory_path):
 def main():
     #Scan for any htm and html files in the /input directory.
     html_files = glob.glob(os.path.join(INPUT_DIR, "*.htm*"))
-    print(f"Found {len(html_files)} files.")
     
-    #End if no html files are found
-    if len(html_files) == 0:
+    #Output quantity of files. End if no html files are found
+    if len(html_files) > 0:
+        print(f"Found {len(html_files)} files.")
+    else:
         print("No input files found.")
         sys.exit(1)
 
