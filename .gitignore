@@ -1,10 +1,9 @@
 /venv
 /.venv
-/.vs
 /__pycache__
 /schedule_files
+/auth
+/input
 credentials.json
 token.json
 schedule.html
-schedule_without_meal.html
-quickstart.py
