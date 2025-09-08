@@ -27,19 +27,20 @@ def main():
     
     #Output quantity of files. End if no html files are found
     if len(html_files) > 0:
-        print(f"Found {len(html_files)} files.")
+        print(f"Found {len(html_files)} file(s).")
     else:
         print("No input files found.")
         sys.exit(1)
 
     #Process each file found in the /input directory and delete when completed.
     for file in html_files:
-        html_content = open(file, 'r')
-        events = process_html(html_content)
-        update_calendar(events)
+        html_content = open(file, 'r') #open file for processing
+        events = process_html(html_content) #process for info
+        update_calendar(events) #create events in calendar
+        html_content.close() #close file after processing
 
     print("Your shifts have been added to your calendar. Goodbye!")
     delete_input_files(INPUT_DIR)
-    exit()
+    sys.exit(0)
 if __name__ == '__main__':
     main()
