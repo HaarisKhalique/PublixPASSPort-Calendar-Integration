@@ -27,7 +27,7 @@ def update_calendar(workdays):
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_PATH, SCOPES)
-                creds = flow.run_local_server(port = 0, open_browser=False)
+                creds = flow.run_local_server(port = 0)
                 #Save credentials for next run
                 with open(TOKEN_PATH, 'w') as token:
                     token.write(creds.to_json())
