@@ -1,3 +1,5 @@
+<p align=center><img src=images/cover-image.jpg></p>
+
 # Publix PASSport Google Calendar™ Integration
 ## by Haaris Khalique
 
@@ -16,6 +18,7 @@ This new version drops the need for users to interact with the program in a term
 Create a folder somewhere accessible to store the program files. Within this folder, create one folder called **auth** and another folder called **input**.
 - **/auth** will store the files necessary for authorizing the program to create events in your Google calendar.
 - **/input** will store any schedule data (HTML files) you wish to pass to the program to upload to your Google calendar.
+
 ![folder-structure](images/folder-structure.png)
 
 ### Set up Google Cloud environment
