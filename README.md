@@ -5,6 +5,7 @@
 
 **Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.**
 ___
+# About
 For a while, I wished for a way to take my shift data from Publix PASSport and upload it to my digital calendar. The only options available to me were screenshotting my schedules or manually creating events in my digital calendar, the latter of which could take up to a minute.
 
 In Summer 2024, I decided to take the task on myself and wrote the first version of this program using Python. It automated the login process, downloaded and processed the HTML of the schedule page from PASSport, and created events in Google Calendar. The web automation worked using Selenium, but the overall workflow was still a bit slower than I desired and handling 2FA got in the way of headless operation.
