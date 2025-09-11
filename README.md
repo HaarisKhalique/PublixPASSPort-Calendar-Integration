@@ -1,4 +1,4 @@
-<p align=center><img src=images/cover-image.jpg></p>
+<p align=center><img src=images/cover-image1.jpg></p>
 
 # Publix PASSport Google Calendar™ Integration
 ## by Haaris Khalique
