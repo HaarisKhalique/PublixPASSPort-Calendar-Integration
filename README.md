@@ -5,13 +5,14 @@
 
 **Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.**
 ___
+# About
 For a while, I wished for a way to take my shift data from Publix PASSport and upload it to my digital calendar. The only options available to me were screenshotting my schedules or manually creating events in my digital calendar, the latter of which could take up to a minute.
 
 In Summer 2024, I decided to take the task on myself and wrote the first version of this program using Python. It automated the login process, downloaded and processed the HTML of the schedule page from PASSport, and created events in Google Calendar. The web automation worked using Selenium, but the overall workflow was still a bit slower than I desired and handling 2FA got in the way of headless operation.
 
 During development, the schedule page on PASSport was redesigned. I decided it was quicker and more secure for users to login to PASSport themselves, save the HTML pages for each schedule week they needed to upload, then pass it directly to the program for processing. This method worked well and I have been using it every week for a full year, from 9/2024 to 9/2025. The same process that used to take 1-2 minutes and repeated gestures on my phone screen now took only seconds and a few clicks of my mouse. However, I designed it to only process one file on each run and it required users to type in the file name in a terminal. What if I needed to upload two weeks worth of schedules? Or three? *Or every single one since my original hire date?*
 
-This new version drops the need for users to interact with the program in a terminal and can handle more than one file at a time. The program looks for any HTML files with the appropriate folder in the project directory, processing each one and uploading the data to Google Calendar. Finally, it deletes the files, so that you have a clean slate for the next run and avoid duplicate entries. The program is now a one-shot operation and requires no input during execution. The only work demanded from the user is the acquisition of the desired HTML page(s) from the schedule section on PASSport.
+This new version drops the need for users to interact with the program in a terminal and can handle more than one file at a time. The program looks for any HTML files within the designated input folder in the project directory, processing each one and uploading the data to Google Calendar. Finally, it deletes the files, so that you have a clean slate for the next run and avoid duplicate entries. The program is now a one-shot operation and requires no input during execution. The only work demanded from the user is the acquisition of the desired HTML page(s) from the schedule section on PASSport.
 
 # Setup
 ###  Create project folder
