@@ -3,7 +3,7 @@
 # Publix PASSport Google Calendar™ Integration
 ## by Haaris Khalique
 
-Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.**
+Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.
 
 ___
 # About
