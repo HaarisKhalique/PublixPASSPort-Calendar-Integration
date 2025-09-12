@@ -49,9 +49,9 @@ ___
  *You can rename the file if you wish, it has no effect. Just maintain the file extension of .htm or .html*
 
 ### 3. Run the program.
-#### Executable
+##### Executable
 Open your project folder and double-click **PubScheduler.exe**
-#### Docker container
+##### Docker container
 Execute the following:
 ```
 docker run --rm \
