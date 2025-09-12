@@ -35,6 +35,9 @@ To call the Google Calendar API, you will need credentials authorizing the progr
 - Install the latest release from the project repository and save it directly to the project folder you created. It should exist alongside **/auth** and **/input**.
 
 ##### Docker container
+```
+docker pull haariskhalique/publix-passport-scheduler:v1.0
+```
 - Docker image here: https://hub.docker.com/r/haariskhalique/publix-passport-scheduler
 
 ___
