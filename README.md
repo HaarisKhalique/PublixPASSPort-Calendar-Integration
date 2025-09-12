@@ -3,7 +3,8 @@
 # Publix PASSport Google Calendar™ Integration
 ## by Haaris Khalique
 
-**Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.**
+Note: This program was written with Python 3.12.3 To ensure compatibility when building from source, make sure to have Python 3.12 installed in your environment.**
+
 ___
 # About
 For a while, I wished for a way to take my shift data from Publix PASSport and upload it to my digital calendar. The only options available to me were screenshotting my schedules or manually creating events in my digital calendar, the latter of which could take up to a minute.
@@ -33,30 +34,42 @@ To call the Google Calendar API, you will need credentials authorizing the progr
 ##### Executable - Windows 11 only
 - Install the latest release from the project repository and save it directly to the project folder you created. It should exist alongside **/auth** and **/input**.
 
+##### Docker container
+- Docker image here: https://hub.docker.com/r/haariskhalique/publix-passport-scheduler
+
 ___
 
 # Usage
 
-#### 1. Log in to Publix PASSport and access the schedule week you wish to add to your calendar.
+### 1. Log in to Publix PASSport and access the schedule week you wish to add to your calendar.
 
-#### 2. Download the HTML page for each desired week and save to /input in your project folder:
+### 2. Download the HTML page for each desired week and save to /input in your project folder:
 ![save-html](images/save-html.png)
 
  *You can rename the file if you wish, it has no effect. Just maintain the file extension of .htm or .html*
 
-#### 3. Run the program.
-##### Executable
-- Open your project folder and double-click **PubScheduler.exe**
+### 3. Run the program.
+#### Executable
+Open your project folder and double-click **PubScheduler.exe**
+#### Docker container
+Execute the following:
+```
+docker run --rm \
+-v /path/auth:/app/auth \
+-v /path/input:/app/input \
+haariskhalique/publix-passport-scheduler:v1.0
+```
+Where:
+- /path/ is the path to your project folder.
+- /auth is the folder which holds credentials.json and token.json.
+- /input is the folder which holds HTML files containing schedule information.
 
-#### 4. Authorize the program to view, modify, and create events
+### 4. Authorize the program to view, modify, and create events
+**Docker users:** You must run the program once locally (either from source or the executable) to generate the token. Then, you can copy the token to the folder you've binded to the container for future use.
 
 Upon first access to your Google Calendar (when no token.json is present), a browser will open and you will be asked to authenticate the program to edit your calendar. Verify that the program named is the same Google Cloud project you created your credentials.json from and authorize the program to modify your calendars.
 
 A **token.json** file will be created in **/input** which will allow you to skip the trust/authorize step in the future. **KEEP THIS FILE SECURE** as it is your personal access token to your calendar. 
-
-
-
-- **Docker users:** Handling inital token generation from a container has been a challenge during development so far. For this reason, you must run the program once locally (either from source or the executable) to generate the token. Then, you can copy the token to the folder you've binded to the container so that it can use it.
 
 The program continues from here. The HTML will be processed for schedule information and events will be created in your Google Calendar within seconds!
 
